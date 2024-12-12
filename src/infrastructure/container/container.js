@@ -6,7 +6,7 @@ const AgriculturistController = require("../../presentation/controllers/agricult
 const AgriculturistRoute = require("../../presentation/routes/agriculturistRoute");
 const AgriculturistUseCase = require("../../application/use-cases/agriculturistUseCase");
 const AgriculturistService = require("../../application/services/agriculturistService");
-
+const AgriculturistRepository = require("../../infrastructure/repository/agriculturistRepository");
 
 const container = createContainer();
 
@@ -16,7 +16,7 @@ container.register({
   agriculturistRoute: asFunction(AgriculturistRoute).singleton(),
   agriculturistUseCase: asFunction(AgriculturistUseCase).singleton(),
   agriculturistService: asFunction(AgriculturistService).singleton(),
-
+  agriculturistRepository: asFunction(AgriculturistRepository).singleton(),
   validationMiddleware: asFunction(ValidationMiddleware)
 });
 

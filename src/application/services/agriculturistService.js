@@ -1,10 +1,10 @@
-function AgriculturistService({}) {
+function AgriculturistService({ agriculturistRepository }) {
 
   async function create(data) {
-    console.log('service - dreate')
+    const agriculturist = await agriculturistRepository.create(data);
+    return agriculturist;
   };
-
-
+  
   return {
     create,   
   }
