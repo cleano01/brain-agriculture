@@ -1,6 +1,6 @@
 const spies = require('chai-spies');
 const { expect, spy } = require("chai").use(spies);
-const agriculturistService = require("../../../../../src/application/services/agriculturistService");
+const agriculturistService = require("../../../../src/application/services/agriculturistService");
 
 describe('Agriculturist Service', () => {
   let agriculturistRepository, service;
@@ -17,7 +17,7 @@ describe('Agriculturist Service', () => {
     spy.restore();
   });
 
-  it.only('should call create of repository', async () => {
+  it('should call create of repository', async () => {
     const response = await service.create({});
 
     expect(agriculturistRepository.create).to.have.been.called.with({});

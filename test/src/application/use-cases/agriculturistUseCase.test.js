@@ -1,6 +1,6 @@
 const spies = require('chai-spies');
 const { expect, spy } = require("chai").use(spies);
-const agriulturistUseCase = require("../../../../../src/application/use-cases/agriculturistUseCase");
+const agriulturistUseCase = require("../../../../src/application/use-cases/agriculturistUseCase");
 
 
 describe('Agriculturist Use Case', () => {
