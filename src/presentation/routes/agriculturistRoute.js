@@ -8,16 +8,16 @@ function agriculturistRoute({
   const router = express.Router();
   
   router.post('/', 
-    validationMiddleware.validate(agriculturistValidator.agriculturistValidator),
+    validationMiddleware.validateBody(agriculturistValidator.agriculturistValidator),
     agriculturistController.create,
   );
   router.put('/:id', 
-    validationMiddleware.validate(agriculturistValidator.agriculturistParamIdValidator),
-    //validationMiddleware.validate(agriculturistValidator.agriculturistValidator),
+    validationMiddleware.validateParams(agriculturistValidator.agriculturistParamIdValidator),
+    validationMiddleware.validateBody(agriculturistValidator.agriculturistValidator),
     agriculturistController.update,
   );
   router.delete('/:id', 
-    validationMiddleware.validate(agriculturistValidator.agriculturistParamIdValidator),
+    validationMiddleware.validateParams(agriculturistValidator.agriculturistParamIdValidator),
     agriculturistController.remove,
   );
   

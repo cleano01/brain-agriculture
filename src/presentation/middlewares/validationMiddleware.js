@@ -1,25 +1,32 @@
 
+
+function _mapError(error, next) {
+  if (error) {
+    const menssage = error.details.map(err => err.message).join(', ');
+    const err = new Error(menssage);
+    err.status = 400;
+    return next(err);  
+  }
+};
+
 module.exports = () => ({
-  validate: (schema) => {
+  validateBody: (schema) => {
     return (req, res, next) => {
-      let _error;
+
+      const { error } = schema.validate(req.body);      
+
+      _mapError(error, next);
+
+      next();  
+    };
+  },
+
+  validateParams: (schema) => {
+    return (req, res, next) => {     
+      const { error } = schema.validate(req.params);
       
-      if (Object.keys(req.body).length > 0) {
-        const { error } = schema.validate(req.body);
-        _error = error;
-      }
-
-      if (Object.keys(req.params).length > 0) {
-        const { error } = schema.validate(req.params);
-        _error = error;
-      }
-      if (_error) {
-        const menssage = _error .details.map(err => err.message).join(', ');
-
-        const err = new Error(menssage);
-        err.status = 400;
-        return next(err);  
-      }
+      _mapError(error, next);
+      
       next();  
     };
   }

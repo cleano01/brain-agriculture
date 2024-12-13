@@ -19,19 +19,22 @@ function AgriculturistRepository({ agriculturistModel }) {
 
   async function findByCPF(cpf) {
     return await Agriculturist.findOne({
-      where: { cpf }
+      where: { cpf },
+      raw: true
     });
   };
 
-  async function findByCnpj(cnpj){
+  async function findByCnpj(cnpj) {
     return await Agriculturist.findOne({
-      where: { cnpj }
+      where: { cnpj },
+      raw: true
     });
   };
 
-  async function findById(id){
+  async function findById(id) {
     return await Agriculturist.findOne({
-      where: { id }
+      where: { id },
+      raw: true
     });
   };
 
@@ -39,8 +42,8 @@ function AgriculturistRepository({ agriculturistModel }) {
     
     return await Agriculturist.update(
       {
-        //cpf: data.cpf,
-        //cnpj: data.cnpj,
+        cpf: data.cpf,
+        cnpj: data.cnpj,
         producerName: data.producerName,
         farmName: data.farmName,
         city: data.city,

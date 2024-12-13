@@ -41,10 +41,38 @@ function AgriculturistService({ agriculturistRepository }) {
         error.status = 404;
         throw error;
     };  
+
+    if (agriculturist.cpf && agriculturist.cpf === data.cpf) {
+      delete data.cpf;
+    };
+
+    if(agriculturist.cpf && agriculturist.cpf != data.cpf && data.cpf) {
+      const hasCpf = await agriculturistRepository.findByCPF(data.cpf);
+      
+      if(hasCpf){
+        const error = new Error('cannot update with past CPF, as it exists for another agriculturist'); 
+        error.status = 422;
+        throw error;
+      };
+    };
     
+    if (agriculturist.cnpj && agriculturist.cnpj === data.cnpj) {
+      delete data.cnpj;
+    };
+
+    if (agriculturist.cnpj && agriculturist.cnpj != data.cnpj && data.cnpj) {
+      const hasCnpj = await agriculturistRepository.findByCnpj(data.cnpj);
+      
+      if(hasCnpj) {
+        const error = new Error('cannot update with past CNPJ, as it exists for another agriculturist'); 
+        error.status = 422;
+        throw error;
+      };
+    };
+
     const agriculturistUpdated = await agriculturistRepository.updateById(id, data);
     
-    return agriculturistUpdated 
+    return agriculturistUpdated;    
   };
   
   async function findById(id) {

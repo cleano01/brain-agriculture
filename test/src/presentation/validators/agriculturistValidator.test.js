@@ -6,7 +6,7 @@ describe('Agriculturist Validator', () => {
   let agriculturistCreateValidator;
 
   beforeEach(() => {
-    agriculturistCreateValidator = agriculturistValidator.agriculturistCreateValidator;
+    agriculturistCreateValidator = agriculturistValidator.agriculturistValidator;
   });
 
   it('should not return error when exists CPF', () => { 
