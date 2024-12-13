@@ -44,3 +44,7 @@ Simple API to manage agriculturists.
 - In the project directory, execute the command below:
 
   > npm run dev
+
+- Access the route below to view the other routes:
+
+  > http://localhost:3000/
