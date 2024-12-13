@@ -1,10 +1,12 @@
-function AgriculturistController({ agriculturistUseCase }) {
+function AgriculturistController({ agriculturistUseCase, navigator }) {
 
   async function getReport(req, res, next) {
     try {
       const response = await agriculturistUseCase.getReport();
 
-      return res.send(response);
+      const formatResponse = navigator.navigatorReport(response)
+      
+      return res.send(formatResponse);
     } catch (error) {
       next(error);
     }    
@@ -14,7 +16,9 @@ function AgriculturistController({ agriculturistUseCase }) {
     try {
       const response = await agriculturistUseCase.create(req.body);
 
-      return res.send(response);
+      const formatResponse = navigator.navigatorCreate(response)
+
+      return res.send(formatResponse);
     } catch (error) {
       next(error);
     }     
@@ -27,7 +31,9 @@ function AgriculturistController({ agriculturistUseCase }) {
 
       const response = await agriculturistUseCase.update(id, data);
       
-      return res.send(response);
+      const formatResponse = navigator.navigatorUpdate(response)
+
+      return res.send(formatResponse);
     } catch (error) {
       next(error);
     } 
@@ -37,9 +43,11 @@ function AgriculturistController({ agriculturistUseCase }) {
     try {
       const id = req.params.id;
     
-      const response = await agriculturistUseCase.remove(id);
-      return res.send(response);
-    
+      await agriculturistUseCase.remove(id);
+
+      const formatResponse = navigator.navigatorRemove(id)
+
+      return res.send(formatResponse);
     } catch (error) {
       next(error);
     }    

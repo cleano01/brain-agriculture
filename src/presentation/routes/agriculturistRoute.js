@@ -23,6 +23,7 @@ function agriculturistRoute({
     agriculturistController.remove,
   );
   
+  
 
   return router;
 }

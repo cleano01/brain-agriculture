@@ -8,10 +8,11 @@ const AgriculturistUseCase = require("../../application/use-cases/agriculturistU
 const AgriculturistService = require("../../application/services/agriculturistService");
 const AgriculturistRepository = require("../../infrastructure/repository/agriculturistRepository");
 const AgriculturistModel = require("../../infrastructure/database/models/index");
-
+const Navigator = require("../../presentation/navigators/navigator")
 const container = createContainer();
 
 container.register({
+  navigator: asFunction(Navigator),
   agriculturistValidator: asFunction(AgriculturistValidator).singleton(),
   agriculturistController: asFunction(AgriculturistController).singleton(),
   agriculturistRoute: asFunction(AgriculturistRoute).singleton(),

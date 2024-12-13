@@ -64,7 +64,7 @@ function AgriculturistRepository({ agriculturistModel }) {
 
 
   async function create(data) {    
-    return await Agriculturist.create({
+    const agriculturist = await Agriculturist.create({
       cpf: data.cpf,
       cnpj: data.cnpj,
       producerName: data.producerName,
@@ -76,6 +76,8 @@ function AgriculturistRepository({ agriculturistModel }) {
       vegetationArea: data.vegetationArea,
       plantedCrops: data.plantedCrops,
     });
+
+    return agriculturist.get({ plain: true });
   };
 
   async function findByCPF(cpf) {
@@ -99,9 +101,8 @@ function AgriculturistRepository({ agriculturistModel }) {
     });
   };
 
-  async function updateById(id, data) {
-    
-    return await Agriculturist.update(
+  async function updateById(id, data) {    
+    const [, updatedRows] = await Agriculturist.update(
       {
         cpf: data.cpf,
         cnpj: data.cnpj,
@@ -115,7 +116,11 @@ function AgriculturistRepository({ agriculturistModel }) {
         plantedCrops: data.plantedCrops,
       }, {
       where: { id },
-    });    
+      returning: true
+    });  
+    
+    return updatedRows[0] ? updatedRows[0].get({ plain: true }) : null;
+
   };
 
   async function deleteById(id) {

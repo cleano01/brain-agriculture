@@ -5,9 +5,16 @@ function createServer(container) {
   
   const app = express();
   
-  app.use(express.json());
+  app.use(express.json());  
+  
 
-  app.use('/agriculturists', agriculturisRoute(container));
+  app.use('/agriculturists', agriculturisRoute(container),);
+
+  app.get('/', (req, res) => {
+    const response = container.navigator.navigatorInit();
+    res.json(response);
+  });
+
 
   app.use((err, req, res, next) => {
     if (err !== 500) {
