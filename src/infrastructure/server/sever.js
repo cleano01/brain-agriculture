@@ -7,10 +7,11 @@ function createServer(container) {
   
   app.use(express.json());
 
-  app.use('/agriculturist', agriculturisRoute(container));
+  app.use('/agriculturists', agriculturisRoute(container));
 
   app.use((err, req, res, next) => {
     if (err !== 500) {
+      console.error(err)
       res.status(err.status).json({
         error: {
           message: err.message || 'Unprocessable Entity'
@@ -30,3 +31,4 @@ function createServer(container) {
 }
 
 module.exports = createServer;
+

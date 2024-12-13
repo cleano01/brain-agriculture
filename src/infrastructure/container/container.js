@@ -1,4 +1,4 @@
-const { createContainer, asFunction } = require("awilix");
+const { createContainer, asFunction, asClass, asValue } = require("awilix");
 
 const AgriculturistValidator = require("../../presentation/validators/agriculturistValidator");
 const ValidationMiddleware = require("../../presentation/middlewares/validationMiddleware")
@@ -7,6 +7,7 @@ const AgriculturistRoute = require("../../presentation/routes/agriculturistRoute
 const AgriculturistUseCase = require("../../application/use-cases/agriculturistUseCase");
 const AgriculturistService = require("../../application/services/agriculturistService");
 const AgriculturistRepository = require("../../infrastructure/repository/agriculturistRepository");
+const AgriculturistModel = require("../../infrastructure/database/models/index");
 
 const container = createContainer();
 
@@ -17,7 +18,8 @@ container.register({
   agriculturistUseCase: asFunction(AgriculturistUseCase).singleton(),
   agriculturistService: asFunction(AgriculturistService).singleton(),
   agriculturistRepository: asFunction(AgriculturistRepository).singleton(),
-  validationMiddleware: asFunction(ValidationMiddleware)
+  agriculturistModel: asFunction(() => AgriculturistModel).singleton(),
+  validationMiddleware: asFunction(ValidationMiddleware),  
 });
 
 module.exports = container;

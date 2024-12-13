@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 module.exports = () => ({
-  agriculturistCreateValidator: Joi.object({
+  agriculturistValidator: Joi.object({
     cpf: Joi.string()
       .pattern(/^\d{11}$/)
       .optional(),
@@ -32,5 +32,15 @@ module.exports = () => ({
       .required(),
   }).xor("cpf", "cnpj"),
 
+  agriculturistParamIdValidator: Joi.object({
+    id: Joi.string()
+      .pattern(/^\d+$/)
+      .required()
+      .messages({
+        "string.pattern.base": "ID must be a string containing a valid integer",
+        "string.empty": "ID cannot be empty",
+        "any.required": "ID is required",
+      }),
+  }),  
  
 });
