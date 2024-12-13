@@ -1,5 +1,11 @@
   function AgriculturistUseCase({ agriculturistService }) {
 
+  async function getReport(data) {
+    const agriculturist = await agriculturistService.getReport(data);
+  
+    return agriculturist;
+  };
+
   async function create(data) {
     const agriculturist = await agriculturistService.create(data);
 
@@ -19,6 +25,7 @@
   };
 
   return {
+    getReport,
     create,
     update,
     remove,

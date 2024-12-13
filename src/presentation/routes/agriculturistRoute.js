@@ -7,6 +7,8 @@ function agriculturistRoute({
 }) {
   const router = express.Router();
   
+  router.get('/reports', agriculturistController.getReport);
+
   router.post('/', 
     validationMiddleware.validateBody(agriculturistValidator.agriculturistValidator),
     agriculturistController.create,

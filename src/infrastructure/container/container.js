@@ -1,4 +1,4 @@
-const { createContainer, asFunction, asClass, asValue } = require("awilix");
+const { createContainer, asFunction } = require("awilix");
 
 const AgriculturistValidator = require("../../presentation/validators/agriculturistValidator");
 const ValidationMiddleware = require("../../presentation/middlewares/validationMiddleware")

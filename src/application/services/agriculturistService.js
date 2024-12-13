@@ -1,5 +1,11 @@
 function AgriculturistService({ agriculturistRepository }) {
 
+  async function getReport() {
+    const report = await agriculturistRepository.getReport();
+
+    return report;
+  };
+
   async function create(data) {
     const hasAgriculturistWithCpf = await data.cpf && await findByCPF(data.cpf);
 
@@ -94,6 +100,7 @@ function AgriculturistService({ agriculturistRepository }) {
   };
 
   return {
+    getReport,
     create,  
     findByCPF, 
     findByCnpj,

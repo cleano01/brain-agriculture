@@ -1,5 +1,14 @@
 function AgriculturistController({ agriculturistUseCase }) {
 
+  async function getReport(req, res, next) {
+    try {
+      const response = await agriculturistUseCase.getReport();
+
+      return res.send(response);
+    } catch (error) {
+      next(error);
+    }    
+  };
   
   async function create(req, res, next) { 
     try {
@@ -37,9 +46,10 @@ function AgriculturistController({ agriculturistUseCase }) {
   };
   
   return {
+    getReport,
     create,
     update,
-    remove,
+    remove,    
   };    
 };
 
